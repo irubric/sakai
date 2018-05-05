@@ -151,7 +151,6 @@ import org.sakaiproject.scoringservice.api.ScoringService;
 import org.sakaiproject.service.gradebook.shared.AssignmentHasIllegalPointsException;
 import org.sakaiproject.service.gradebook.shared.CategoryDefinition;
 import org.sakaiproject.service.gradebook.shared.ConflictingAssignmentNameException;
-import org.sakaiproject.service.gradebook.shared.ConflictingExternalIdException;
 import org.sakaiproject.service.gradebook.shared.GradebookExternalAssessmentService;
 import org.sakaiproject.service.gradebook.shared.GradebookNotFoundException;
 import org.sakaiproject.service.gradebook.shared.GradebookService;
@@ -17778,7 +17777,7 @@ public class AssignmentAction extends PagedResourceActionII
 					// Determine if a scoring component (like a rubric) has been associated with this gradebook item
 					ScoringComponent component = scoringService.getScoringComponent(
 							scoringAgent.getAgentId(), gradebookUid, gbItemId);
-					boolean scoringComponentEnabled = component != null;
+					boolean scoringComponentEnabled = component != null && !assignment.isGroup();
 					
 					context.put("scoringComponentEnabled", scoringComponentEnabled);
 					
